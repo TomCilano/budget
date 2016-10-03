@@ -23,7 +23,7 @@ public class LineServlet extends HttpServlet{
             /// create a new instance of the service to be used
             LineService thisLineService = new LineService();
             // put into request
-            req.setAttribute("selectedLine", thisLineService.getAllLineService());
+            req.getSession().setAttribute("selectedLine", thisLineService.getAllLineService());
 
             // forward to create page
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/index.jsp");

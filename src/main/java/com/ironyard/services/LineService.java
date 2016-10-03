@@ -17,12 +17,16 @@ public class LineService {
         LineItems found = null;
         List<LineItems> allOfThem = new ArrayList<LineItems>();
         DbService myDba = new DbService();
-        Connection conn = (Connection) myDba.getConnection();
-        PreparedStatement stmt = conn.prepareCall("SELECT * FROM LineItems");
+        Connection conn =  myDba.getConnection();
+        PreparedStatement stmt = conn.prepareCall("SELECT * FROM budget.lineitem");
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             found = new LineItems();
-            found.setCategory(rs.getString("Category"));
+            found.setDescription(rs.getString("lin_description"));
+            found.setCategory(rs.getString("lin_category"));
+            found.setBudgetedAmount(rs.getDouble("lin_budgetedamount"));
+            found.setTotalAmount(rs.getDouble("lin_actualamount"));
+            found.setId(rs.getInt("lin_id"));
             allOfThem.add(found);
         }
         return allOfThem;

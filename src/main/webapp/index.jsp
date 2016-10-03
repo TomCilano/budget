@@ -5,40 +5,30 @@
 
 <html>
 <head>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 50%;
-        }
 
-        td, th {
-            border: 2px solid ;
-            text-align: left;
-            padding: 8px;
-        }
-        tr:nth-child(odd){
-            background:gainsboro;
-        }
-        tr:nth-child(even) {
-            background-color: ghostwhite;
-        }
-    </style>
     <br>
     <title>BudgetApp</title>
 </head>
 <body background="http://youngaccountinginc.com/wp-content/themes/ppc-custom/media/background_02.jpg">
 <center><b><u><h1>Budget App</h1></u></b></center>
-<center><table>
-    <tr>Line Items</tr>
+<form method="post" action="/budget/budgetItems">
+<center><table border="1">
+<thead>
+    <tr>
+    <tr>Line Items
     <th>Description</th>
     <th>Category</th>
     <th>Budgeted Amount</th>
     <th> Actual Amount</th>
+    </tr>
+    </thead>
 
-</table></center>
-<c:forEach items="${selectedLine}" var="lineItem">
-    <c:out value="${lineItem.category}"/>
+<c:forEach items="${selectedLine}" var="line">
+    <tr>
+      <th><c:out value="${line.lin_category}"/></th>
+    </tr>
 </c:forEach>
+</table></center>
+</form>
 </body>
 </html>

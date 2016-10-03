@@ -4,34 +4,36 @@ package com.ironyard.data;
  * Created by Tom on 9/29/16.
  */
 public class LineItems {
-    private String Description;
-    private String Category;
+    private String description;
+    private String category;
     private double budgetedAmount;
     private double totalAmount;
     private int id;
 
     public LineItems() {
-        Description = Description;
-        Category = Category;
+        this.description = description;
+        this.category = category;
         this.budgetedAmount = budgetedAmount;
         this.totalAmount = totalAmount;
         this.id = id;
     }
 
+
+
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        description = description;
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        Category = category;
+        category = category;
     }
 
     public double getBudgetedAmount() {
