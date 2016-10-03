@@ -8,10 +8,10 @@
 	<display-name>Archtype created web application</display-name>
 	<servlet>
 		<servlet-name>LineServlet</servlet-name>
-		<servlet-class>com.ironyard.servlets.LineServlet</servlet-class>
+		<servlet-class>com.ironyard.servlet.LineServiceServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LineServlet</servlet-name>
-		<url-pattern>/budgetItems</url-pattern>
+		<url-pattern>/lineitems</url-pattern>
 	</servlet-mapping>
 </web-app>

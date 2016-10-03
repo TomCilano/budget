@@ -11,21 +11,14 @@ public class LineItems {
     private int id;
 
     public LineItems() {
-        this.description = description;
-        this.category = category;
-        this.budgetedAmount = budgetedAmount;
-        this.totalAmount = totalAmount;
-        this.id = id;
     }
-
-
 
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 
     public String getCategory() {
@@ -33,7 +26,7 @@ public class LineItems {
     }
 
     public void setCategory(String category) {
-        category = category;
+        this.category = category;
     }
 
     public double getBudgetedAmount() {

@@ -11,7 +11,7 @@
 </head>
 <body background="http://youngaccountinginc.com/wp-content/themes/ppc-custom/media/background_02.jpg">
 <center><b><u><h1>Budget App</h1></u></b></center>
-<form method="post" action="/budget/budgetItems">
+<form method="post" action="/budget/lineitems">
 <center><table border="1">
 <thead>
     <tr>
@@ -23,9 +23,9 @@
     </tr>
     </thead>
 
-<c:forEach items="${selectedLine}" var="line">
+<c:forEach items="${lineitems}" var="line">
     <tr>
-      <th><c:out value="${line.lin_category}"/></th>
+      <td><c:out value="${line.category}"/></td>
     </tr>
 </c:forEach>
 </table></center>

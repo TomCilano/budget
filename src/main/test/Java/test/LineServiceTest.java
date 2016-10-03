@@ -1,5 +1,6 @@
-package com.ironyard.services;
+package test;
 
+import com.ironyard.services.LineService;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,5 +16,6 @@ public class LineServiceTest {
         LineService testLine = new LineService();
         Assert.assertNotNull(testLine.getAllLineService());
     }
+
 
 }
