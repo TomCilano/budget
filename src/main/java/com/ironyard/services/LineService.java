@@ -39,6 +39,7 @@ public class LineService {
             found.setId(rs.getInt("lin_id"));
             allOfThem.add(found);
         }
+        conn.close();
         return allOfThem;
     }
     public List<Total> getTotals() throws SQLException{
@@ -55,6 +56,44 @@ public class LineService {
             found.setActualTotal(rs.getDouble("actualtotal"));
             allTotals.add(found);
         }
+        conn.close();
             return allTotals;
+    }
+    public List<LineItems> search (String search) throws SQLException {
+        List<LineItems> found = new ArrayList<LineItems>();
+        DbService myDb = new DbService();
+        Connection con = null;
+
+        try {
+            con = myDb.getConnection();
+            search = search + "%";
+            PreparedStatement ps = con.prepareStatement("select * from budget.lineitem WHERE (lin_category ILIKE ?) OR (lin_description ILIKE ?);");
+            ps.setString(1, search);
+            ps.setString(2, search);
+            ResultSet rs = ps.executeQuery();
+            found = convertResultsToList(rs);
+        } catch (Exception error) {
+            error.printStackTrace();
+            con.rollback();
+        } finally {
+            con.close();
+        }
+        return found;
+    }
+
+    private List<LineItems> convertResultsToList(ResultSet rs) throws SQLException{
+        List<LineItems> found = new ArrayList<LineItems>();
+        while (rs.next())
+        {
+            LineItems x = new LineItems();
+            x.setDescription(rs.getString("lin_description"));
+            x.setCategory(rs.getString("lin_category"));
+            x.setBudgetedAmount(rs.getDouble("lin_budgetedamount"));
+            x.setTotalAmount(rs.getDouble("lin_actualamount"));
+            x.setId(rs.getInt("lin_id"));
+            found.add(x);
+
+        }
+        return found;
     }
 }

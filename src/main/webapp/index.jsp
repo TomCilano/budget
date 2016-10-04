@@ -18,7 +18,7 @@
     }
 
     td, th {
-        border: 1px solid #dddddd;
+        border: 2px solid #363636;
         text-align: left;
         padding: 8px;
     }
@@ -31,10 +31,14 @@
 </style>
 <body background="http://youngaccountinginc.com/wp-content/themes/ppc-custom/media/background_02.jpg">
 <center><b><u><h1>Budget App</h1></u></b></center>
-<form method="post" action="/budget/lineitems">
-<center><table border="1">
-<thead>
-    <tr><tr>Line Items
+<form method="post" action="/search">
+<center><table>
+    <h1>Line Items</h1>
+    Search <input type="text" name="searchByText"/>
+    <input type="submit" name="Filter Results"/>
+
+    <thead>
+    <tr><tr>
     <th>Description</th>
     <th>Category</th>
     <th>Budgeted Amount</th>

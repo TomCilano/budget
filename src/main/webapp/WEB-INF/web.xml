@@ -14,4 +14,14 @@
 		<servlet-name>LineServlet</servlet-name>
 		<url-pattern>/lineitems</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SearchLine</servlet-name>
+		<servlet-class>com.ironyard.servlet.SearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchLine</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+
 </web-app>

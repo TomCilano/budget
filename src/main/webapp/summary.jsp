@@ -15,7 +15,7 @@
     }
 
     td, th {
-        border: 1px solid #dddddd;
+        border: 2px solid #363636;
         text-align: left;
         padding: 8px;
     }
@@ -53,11 +53,14 @@
       <center><h2>Totals</h2></center>
         <th>Budget</th>
         <th>Actual</th>
+       <th>Difference</th>
     </tr>
     </thead>
         <tr>
             <td><c:out value="${totalbudget}"/></td>
             <td><c:out value="${totalamount}"/></td>
+            <td><c:out value="${difference}"/></td>
+
         </tr>
 
 </table>

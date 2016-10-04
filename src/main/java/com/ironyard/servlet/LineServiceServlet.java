@@ -36,15 +36,18 @@ public class LineServiceServlet extends HttpServlet {
 
             double one = 0;
             double two = 0;
+            double three = 0;
 
-            req.getSession().setAttribute("lineitems", ls.getAllLineService());
-            req.getSession().setAttribute("total", ls.getTotals());
+            req.setAttribute("lineitems", ls.getAllLineService());
+            req.setAttribute("total", ls.getTotals());
             for(LineItems x: allLine){
                 one = one + x.getBudgetedAmount();
                 two = two + x.getTotalAmount();
+                three = two - one;
             }
             req.getSession().setAttribute("totalbudget", one);
             req.getSession().setAttribute("totalamount", two);
+            req.getSession().setAttribute("difference", three);
 
             LineService nLs = new LineService();
             req.setAttribute("linetotal", nLs.getTotals());
@@ -54,6 +57,7 @@ public class LineServiceServlet extends HttpServlet {
             e.printStackTrace();
             destination = "/error.jsp";
         }
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);
 
