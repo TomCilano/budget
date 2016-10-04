@@ -1,6 +1,7 @@
 package com.ironyard.services;
 
 import com.ironyard.data.LineItems;
+import com.ironyard.data.Total;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ import java.util.List;
  lin_id INTEGER PRIMARY KEY NOT NULL
  );
  */
+
 public class LineService {
     public List<LineItems> getAllLineService() throws SQLException {
         LineItems found = null;
@@ -38,5 +40,21 @@ public class LineService {
             allOfThem.add(found);
         }
         return allOfThem;
+    }
+    public List<Total> getTotals() throws SQLException{
+        Total found = null;
+        List<Total> allTotals = new ArrayList<Total>();
+        DbService myDba = new DbService();
+        Connection conn =  myDba.getConnection();
+        PreparedStatement stmt = conn.prepareCall("SELECT lin_category, sum(lin_budgetedamount) AS totalBudget, sum(lin_budgetedamount) as actualtotal from budget.lineitem group by lin_category");
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            found = new Total();
+            found.setCategory(rs.getString("lin_category"));
+            found.setBudgetTotal(rs.getDouble("totalBudget"));
+            found.setActualTotal(rs.getDouble("actualtotal"));
+            allTotals.add(found);
+        }
+            return allTotals;
     }
 }

@@ -13,9 +13,7 @@ public class LineItems {
     public LineItems() {
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description; }
 
     public void setDescription(String description) {
         this.description = description;
@@ -52,5 +50,7 @@ public class LineItems {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
 
