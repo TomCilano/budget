@@ -39,7 +39,7 @@ public class LineServiceServlet extends HttpServlet {
             double three = 0;
 
             req.setAttribute("lineitems", ls.getAllLineService());
-            req.setAttribute("total", ls.getTotals());
+            req.getSession().setAttribute("total", ls.getTotals());
             for(LineItems x: allLine){
                 one = one + x.getBudgetedAmount();
                 two = two + x.getTotalAmount();

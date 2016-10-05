@@ -64,7 +64,7 @@
         </tr>
 
 </table>
-<center><a href="index.jsp">BACK</a></center>
+<center><a href="/lineitems">BACK</a></center>
 
 </body>
 </html>

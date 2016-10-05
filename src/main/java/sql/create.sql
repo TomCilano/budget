@@ -1,3 +1,5 @@
+CREATE SCHEMA budget
+
 CREATE TABLE lineitem
 (
     lin_description VARCHAR(155),

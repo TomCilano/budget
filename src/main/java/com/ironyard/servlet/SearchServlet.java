@@ -29,7 +29,7 @@ public class SearchServlet extends HttpServlet {
         {
          //get search text
             String searchByText = req.getParameter("searchByText");
-            req.setAttribute("linelist", ls.search(searchByText));
+            req.setAttribute("lineitems", ls.search(searchByText));
 
         }
         catch (Exception error)

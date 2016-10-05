@@ -31,12 +31,14 @@
 </style>
 <body background="http://youngaccountinginc.com/wp-content/themes/ppc-custom/media/background_02.jpg">
 <center><b><u><h1>Budget App</h1></u></b></center>
+
 <form method="post" action="/search">
-<center><table>
+
+    <center><table>
     <h1>Line Items</h1>
     Search <input type="text" name="searchByText"/>
-    <input type="submit" name="Filter Results"/>
-
+    <input type="submit" name="Search"/>
+<p></p>
     <thead>
     <tr><tr>
     <th>Description</th>
