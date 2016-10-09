@@ -9,34 +9,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 /**
- * Created by Tom on 10/5/16.
+ * Created by Tom on 10/9/16.
  */
-public class LineItemsServlet extends HttpServlet {
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    }
-
+public class SelectItemServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String destination = "/index.jsp";
+
+        String destination = "/edit.jsp";
+
+        //get the id from req
+
+        String id = req.getParameter("id");
+        Integer idParse = Integer.parseInt(id);
+
         LineService ls = new LineService();
 
-        try
+        LineItems foundIt = null;
 
-        {
-            req.setAttribute("myItems", ls.getAllLineService());
-
+        try {
+            foundIt = ls.getItemById(idParse);
         }
-        catch (Exception e){
+        catch (SQLException e){
             e.printStackTrace();
             destination = "/error.jsp";
-
         }
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(destination);
+        req.setAttribute("anEdit", foundIt );
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);
     }
+
 }

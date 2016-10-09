@@ -41,24 +41,31 @@
 <p></p>
     <thead>
     <tr><tr>
-    <th>Description</th>
-    <th>Category</th>
-    <th>Budgeted Amount</th>
-    <th>Actual Amount</th>
+        <th>Edit</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Budgeted Amount</th>
+        <th>Actual Amount</th>
+        <th>Delete</th>
     </tr>
     </thead>
 
 <c:forEach items="${lineitems}" var="line">
+
     <tr>
+        <td><a href="/select?id=<c:out value="${line.id}"/>">EDIT</a></td>
         <td><c:out value="${line.description}"/></td>
         <td><c:out value="${line.category}"/></td>
         <td><c:out value="${line.budgetedAmount}"/></td>
         <td><c:out value="${line.totalAmount}"/></td>
+        <td><a href="/delete?id=<c:out value="${line.id}"/>">DELETE</a></td>
     </tr>
-    </c:forEach>
+
+
+</c:forEach>
 </table></center>
 </form>
 <center><a href="/summary.jsp">SUMMARY HERE</a></center>
-<a href="/add.jsp">Add Items</a>
+<center><a href="/add.jsp">Add Items</a></center>
 </body>
 </html>

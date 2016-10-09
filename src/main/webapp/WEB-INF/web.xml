@@ -31,12 +31,36 @@
 		<url-pattern>/search</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>CreateLine</servlet-name>
-		<servlet-class>com.ironyard.servlet.CreateServlet</servlet-class>
-	</servlet>
+	<servlet-name>CreateLine</servlet-name>
+	<servlet-class>com.ironyard.servlet.CreateServlet</servlet-class>
+</servlet>
 	<servlet-mapping>
 		<servlet-name>CreateLine</servlet-name>
 		<url-pattern>/create</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DeleteLine</servlet-name>
+		<servlet-class>com.ironyard.servlet.DeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteLine</servlet-name>
+		<url-pattern>/delete</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UpdateService</servlet-name>
+		<servlet-class>com.ironyard.servlet.UpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateService</servlet-name>
+		<url-pattern>/update</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SelectService</servlet-name>
+		<servlet-class>com.ironyard.servlet.SelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SelectService</servlet-name>
+		<url-pattern>/select</url-pattern>
 	</servlet-mapping>
 
 </web-app>

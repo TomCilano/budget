@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 /**
  * Created by Tom on 9/29/16.
@@ -144,7 +145,7 @@ public class LineService
         try
         {
             conn = myDb.getConnection();
-            PreparedStatement stmt = conn.prepareCall("INSERT INTO  budget.lineitem (lin_id, lin_description, lin_category, lin_budgetedamount, lin_actualamount) VALUES (nextval('budget.lineitem_SEQ'),?,?,?,?) ");
+            PreparedStatement stmt = conn.prepareCall("INSERT INTO  budget.LINEITEM (lin_id, lin_description, lin_category, lin_budgetedamount, lin_actualamount) VALUES (nextval('budget.LINEITEM_SEQ'),?,?,?,?) ");
             stmt.setString(1, myLine.getDescription());
             stmt.setString(2, myLine.getCategory());
             stmt.setDouble(3, myLine.getBudgetedAmount());
@@ -180,29 +181,61 @@ public class LineService
         }
     }
 
-    public void update (LineItems aLineItem) throws SQLException
-    {
+    public void update (LineItems aLineItem) throws SQLException {
         DbService myDb = new DbService();
         Connection conn = null;
 
         try {
             conn = myDb.getConnection();
             PreparedStatement stmt = conn.prepareStatement("UPDATE budget.lineitem SET lin_description = ?, lin_category =?, lin_budgetedamount=?, lin_actualamount=?, WHERE lin_id=?; ");
-            stmt.setString(1, aLineItem.getDescription() );
+            stmt.setString(1, aLineItem.getDescription());
             stmt.setString(2, aLineItem.getCategory());
             stmt.setDouble(3, aLineItem.getBudgetedAmount());
             stmt.setDouble(4, aLineItem.getTotalAmount());
             stmt.setInt(5, aLineItem.getId());
             stmt.executeUpdate();
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             conn.rollback();
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             conn.close();
         }
     }
+        public LineItems getItemById(int idParse) throws SQLException
+        {
+            DbService myDB = new DbService();
+            Connection conn = null;
+            LineItems foundId = null;
+
+            try {
+                conn = myDB.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT FROM budget.lineitem WHERE lin_id =?");
+                stmt.setInt(1, idParse);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()){
+                    foundId = new LineItems();
+                    foundId.setDescription(rs.getString("lin_description"));
+                    foundId.setCategory(rs.getString("lin_category"));
+                    foundId.setBudgetedAmount(rs.getDouble("lin_budgetedamount"));
+                    foundId.setTotalAmount(rs.getDouble("lin_acutalamount"));
+                    foundId.setId(rs.getInt("lin_id"));
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+                conn.rollback();
+                throw  e;
+            }
+            finally {
+                conn.close();
+            }
+            return foundId;
+        }
+
+
 }
+
 

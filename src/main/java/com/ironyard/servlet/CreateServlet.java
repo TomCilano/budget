@@ -42,8 +42,7 @@ public class CreateServlet extends HttpServlet {
             myService.save(myLine);
         }
         catch (Exception e){
-            e.printStackTrace();
-            destination = "error.jsp";
+
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);
