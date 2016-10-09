@@ -16,7 +16,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>lineitems</servlet-name>
-		<servlet-class>com.ironyard.servlet.lineItemsServlet</servlet-class>
+		<servlet-class>com.ironyard.servlet.LineItemsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>lineitems</servlet-name>
@@ -29,6 +29,14 @@
 	<servlet-mapping>
 		<servlet-name>SearchLine</servlet-name>
 		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateLine</servlet-name>
+		<servlet-class>com.ironyard.servlet.CreateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateLine</servlet-name>
+		<url-pattern>/create</url-pattern>
 	</servlet-mapping>
 
 </web-app>

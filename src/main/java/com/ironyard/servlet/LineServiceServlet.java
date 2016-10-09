@@ -33,10 +33,9 @@ public class LineServiceServlet extends HttpServlet {
         List<LineItems> allLine = ls.getAllLineService();
 
 
-
-            double one = 0;
-            double two = 0;
-            double three = 0;
+            double one = 0.0;
+            double two = 0.0;
+            double three = 0.0;
 
             req.setAttribute("lineitems", ls.getAllLineService());
             req.getSession().setAttribute("total", ls.getTotals());

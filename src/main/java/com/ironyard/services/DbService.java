@@ -11,7 +11,12 @@ public class DbService {
     String user = "postgres";
     String password = "admin";
 
-    public Connection getConnection() throws SQLException {
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
+   public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
 

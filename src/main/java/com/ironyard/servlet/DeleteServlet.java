@@ -8,24 +8,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
- * Created by Tom on 10/5/16.
+ * Created by Tom on 10/8/16.
  */
-public class lineItemsServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+
+        String destination = "/lineitems";
+
+        String id = req.getParameter("id");
+        // grab the movie by its id
+        int idDel = Integer.parseInt(id);
+
         LineService ls = new LineService();
-        String destination = "/lineitems.jsp";
-        try
-        {
-            req.setAttribute("myItems", ls.getAllLineService());
+
+        try {
+            ls.delete(idDel);
         }
-        catch (Exception e){
+        catch (SQLException e){
             e.printStackTrace();
-            destination = "/error.jsp";
+            destination = "error.jsp";
         }
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);
     }

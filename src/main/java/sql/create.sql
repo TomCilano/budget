@@ -8,3 +8,4 @@ CREATE TABLE lineitem
     lin_actualamount NUMERIC,
     lin_id INTEGER PRIMARY KEY NOT NULL
 );
+

@@ -22,15 +22,24 @@ import java.util.List;
  );
  */
 
-public class LineService {
-    public List<LineItems> getAllLineService() throws SQLException {
+public class LineService
+{
+    /**
+     * Get the movies out of thw database and assigns them to the object models
+     * in the CLass LineItems
+     * @return
+     * @throws SQLException
+     */
+    public List<LineItems> getAllLineService() throws SQLException
+    {
         LineItems found = null;
         List<LineItems> allOfThem = new ArrayList<LineItems>();
         DbService myDba = new DbService();
         Connection conn =  myDba.getConnection();
         PreparedStatement stmt = conn.prepareCall("SELECT * FROM budget.lineitem");
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
+        while (rs.next())
+        {
             found = new LineItems();
             found.setDescription(rs.getString("lin_description"));
             found.setCategory(rs.getString("lin_category"));
@@ -42,14 +51,23 @@ public class LineService {
         conn.close();
         return allOfThem;
     }
-    public List<Total> getTotals() throws SQLException{
+
+    /**
+     *get the sum of the budgeted amount and total amounts in the DB and assigns them to the
+     * data objects in the Class Total
+     * @return
+     * @throws SQLException
+     */
+    public List<Total> getTotals() throws SQLException
+    {
         Total found = null;
         List<Total> allTotals = new ArrayList<Total>();
         DbService myDba = new DbService();
         Connection conn =  myDba.getConnection();
         PreparedStatement stmt = conn.prepareCall("SELECT lin_category, sum(lin_budgetedamount) AS totalBudget, sum(lin_budgetedamount) as actualtotal from budget.lineitem group by lin_category");
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()){
+        while (rs.next())
+        {
             found = new Total();
             found.setCategory(rs.getString("lin_category"));
             found.setBudgetTotal(rs.getDouble("totalBudget"));
@@ -59,12 +77,21 @@ public class LineService {
         conn.close();
             return allTotals;
     }
-    public List<LineItems> search (String search) throws SQLException {
+
+    /**
+     *
+     * @param
+     * @return
+     * @throws SQLException
+     */
+    public List<LineItems> search (String search) throws SQLException
+    {
         List<LineItems> found = new ArrayList<LineItems>();
         DbService myDb = new DbService();
         Connection con = null;
 
-        try {
+        try
+        {
             con = myDb.getConnection();
             search = search + "%";
             PreparedStatement ps = con.prepareStatement("select * from budget.lineitem WHERE (lin_category ILIKE ?) OR (lin_description ILIKE ?);");
@@ -72,7 +99,8 @@ public class LineService {
             ps.setString(2, search);
             ResultSet rs = ps.executeQuery();
             found = convertResultsToList(rs);
-        } catch (Exception error) {
+        } catch (Exception error)
+        {
             error.printStackTrace();
             con.rollback();
         } finally {
@@ -81,7 +109,14 @@ public class LineService {
         return found;
     }
 
-    private List<LineItems> convertResultsToList(ResultSet rs) throws SQLException{
+    /**
+     *
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
+    private List<LineItems> convertResultsToList(ResultSet rs) throws SQLException
+    {
         List<LineItems> found = new ArrayList<LineItems>();
         while (rs.next())
         {
@@ -96,4 +131,78 @@ public class LineService {
         }
         return found;
     }
+
+    /**
+     * creates a budget object in the DB, VALUES (nextval('budget.lineitem_SEQ' creates a new ID for the entry
+     * @param myLine
+     * @throws SQLException
+     */
+    public void save (LineItems myLine) throws SQLException
+    {
+        DbService myDb = new DbService();
+        Connection conn = null;
+        try
+        {
+            conn = myDb.getConnection();
+            PreparedStatement stmt = conn.prepareCall("INSERT INTO  budget.lineitem (lin_id, lin_description, lin_category, lin_budgetedamount, lin_actualamount) VALUES (nextval('budget.lineitem_SEQ'),?,?,?,?) ");
+            stmt.setString(1, myLine.getDescription());
+            stmt.setString(2, myLine.getCategory());
+            stmt.setDouble(3, myLine.getBudgetedAmount());
+            stmt.setDouble(4, myLine.getTotalAmount());
+            stmt.executeUpdate();
+        }
+        catch (Exception e){
+
+            e.printStackTrace();
+            conn.rollback();
+        }
+        finally {
+            conn.close();
+        }
+
+    }
+    public void delete (int id) throws SQLException{
+        DbService myDb = new DbService();
+        Connection conn = null;
+
+        try {
+            conn = myDb.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE from budget.lineitem WHERE lin_id =?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            conn.rollback();
+        }
+        finally {
+            conn.close();
+        }
+    }
+
+    public void update (LineItems aLineItem) throws SQLException
+    {
+        DbService myDb = new DbService();
+        Connection conn = null;
+
+        try {
+            conn = myDb.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE budget.lineitem SET lin_description = ?, lin_category =?, lin_budgetedamount=?, lin_actualamount=?, WHERE lin_id=?; ");
+            stmt.setString(1, aLineItem.getDescription() );
+            stmt.setString(2, aLineItem.getCategory());
+            stmt.setDouble(3, aLineItem.getBudgetedAmount());
+            stmt.setDouble(4, aLineItem.getTotalAmount());
+            stmt.setInt(5, aLineItem.getId());
+            stmt.executeUpdate();
+
+        }
+        catch (Exception e){
+            conn.rollback();
+            e.printStackTrace();
+        }
+        finally {
+            conn.close();
+        }
+    }
 }
+
