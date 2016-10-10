@@ -1,4 +1,4 @@
-CREATE SCHEMA budget
+CREATE SCHEMA budget;
 
 CREATE TABLE lineitem
 (
@@ -9,3 +9,10 @@ CREATE TABLE lineitem
     lin_id INTEGER PRIMARY KEY NOT NULL
 );
 
+CREATE SEQUENCE budget.lineitem_seq
+  MINVALUE 1
+  MAXVALUE 90000
+  START WITH 9
+  INCREMENT BY 1
+  CACHE 20;
+\

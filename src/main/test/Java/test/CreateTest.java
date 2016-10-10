@@ -20,8 +20,8 @@ public class CreateTest {
     public void createBudget() throws Exception {
         LineService ls = new LineService();
         LineItems li = new LineItems();
-        li.setCategory("Entertainment");
-        li.setDescription("Movies");
+        li.setCategory("Food");
+        li.setDescription("Beer");
         li.setBudgetedAmount(100);
 
         li.setTotalAmount(300);
@@ -32,12 +32,12 @@ public class CreateTest {
             e.printStackTrace();
         }
 
-        List<LineItems> found = ls.search("Entertainment");
+        List<LineItems> found = ls.search("Food");
         assertNotNull(found);
         assertTrue(found.size() == 1);
         LineItems foundBudget = found.get(0);
-        assertEquals(foundBudget.getCategory(), "Entertainment");
-        assertEquals(foundBudget.getDescription(), "Movies");
+        assertEquals(foundBudget.getCategory(), "Food");
+        assertEquals(foundBudget.getDescription(), "Beer");
         assertEquals(foundBudget.getBudgetedAmount(), 100, 1);
         assertEquals(foundBudget.getTotalAmount(), 300, 1);
         assertTrue(foundBudget.getId() > 0);

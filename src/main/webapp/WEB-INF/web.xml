@@ -15,12 +15,12 @@
 		<url-pattern>/lineitems</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>lineitems</servlet-name>
-		<servlet-class>com.ironyard.servlet.LineItemsServlet</servlet-class>
+		<servlet-name>ListItemsServlet</servlet-name>
+		<servlet-class>com.ironyard.servlet.ListItemsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>lineitems</servlet-name>
-		<url-pattern>/items</url-pattern>
+		<servlet-name>ListItemsServlet</servlet-name>
+		<url-pattern>/list</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>SearchLine</servlet-name>

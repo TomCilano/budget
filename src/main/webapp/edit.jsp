@@ -12,7 +12,7 @@
 <head>
     <title>Edit</title>
 </head>
-<body>
+<body background="http://youngaccountinginc.com/wp-content/themes/ppc-custom/media/background_02.jpg">
 Click save to update.
 <form action="/create" method="post">
     <table>

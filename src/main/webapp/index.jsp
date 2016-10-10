@@ -66,6 +66,8 @@
 </table></center>
 </form>
 <center><a href="/summary.jsp">SUMMARY HERE</a></center>
+<br>
+<br>
 <center><a href="/add.jsp">Add Items</a></center>
 </body>
 </html>

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Tom on 10/5/16.
  */
-public class LineItemsServlet extends HttpServlet {
+public class ListItemsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,21 +22,24 @@ public class LineItemsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String destination = "/index.jsp";
-        LineService ls = new LineService();
+
 
         try
 
         {
-            req.setAttribute("myItems", ls.getAllLineService());
+            LineService ls = new LineService();
+            List<LineItems> myLine = ls.getAllLineService();
+            req.getSession().setAttribute("myItems", myLine);
 
+
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req,resp);
         }
         catch (Exception e){
             e.printStackTrace();
-            destination = "/error.jsp";
-
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
+            dispatcher.forward(req,resp);
         }
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(destination);
-        dispatcher.forward(req,resp);
+
     }
 }

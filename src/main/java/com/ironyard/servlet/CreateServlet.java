@@ -21,7 +21,12 @@ import java.io.IOException;
 public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String destination = "/lineitems";
+        doGet(req,resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String destination = "/list";
 
         String description = req.getParameter("nDescription");
         String category = req.getParameter("nCategory");
@@ -48,4 +53,6 @@ public class CreateServlet extends HttpServlet {
         dispatcher.forward(req,resp);
 
     }
+
+
 }

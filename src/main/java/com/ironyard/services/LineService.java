@@ -145,7 +145,8 @@ public class LineService
         try
         {
             conn = myDb.getConnection();
-            PreparedStatement stmt = conn.prepareCall("INSERT INTO  budget.LINEITEM (lin_id, lin_description, lin_category, lin_budgetedamount, lin_actualamount) VALUES (nextval('budget.LINEITEM_SEQ'),?,?,?,?) ");
+            PreparedStatement stmt = conn.prepareCall("INSERT INTO  budget.LINEITEM (lin_id, lin_description, lin_category, lin_budgetedamount, lin_actualamount)" +
+                    " VALUES (nextval('budget.lineitem_SEQ'),?,?,?,?) ");
             stmt.setString(1, myLine.getDescription());
             stmt.setString(2, myLine.getCategory());
             stmt.setDouble(3, myLine.getBudgetedAmount());
