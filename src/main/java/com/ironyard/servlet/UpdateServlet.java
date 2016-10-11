@@ -25,7 +25,7 @@ public class UpdateServlet extends HttpServlet {
         String category = req.getParameter("nCategory");
         String budgetedAmount = req.getParameter("nBudgetedAmount");
         String totalAmount = req.getParameter("nTotalAmount");
-        String id = req.getParameter("id");
+        String id = req.getParameter("nId");
 
 
         Double budA =  Double.parseDouble(budgetedAmount);
@@ -47,7 +47,7 @@ public class UpdateServlet extends HttpServlet {
         }
         catch (SQLException e){
             e.printStackTrace();
-            destination = "error.jsp";
+            destination = "/error.jsp";
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);

@@ -26,7 +26,7 @@ public class CreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String destination = "/list";
+        String destination = "/lineitems";
 
         String description = req.getParameter("nDescription");
         String category = req.getParameter("nCategory");

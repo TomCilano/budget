@@ -26,7 +26,6 @@ public class SelectItemServlet extends HttpServlet{
         Integer idParse = Integer.parseInt(id);
 
         LineService ls = new LineService();
-
         LineItems foundIt = null;
 
         try {
@@ -36,7 +35,7 @@ public class SelectItemServlet extends HttpServlet{
             e.printStackTrace();
             destination = "/error.jsp";
         }
-        req.setAttribute("anEdit", foundIt );
+        req.setAttribute("anEdit", foundIt);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
         dispatcher.forward(req,resp);

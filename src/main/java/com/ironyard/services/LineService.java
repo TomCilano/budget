@@ -188,7 +188,7 @@ public class LineService
 
         try {
             conn = myDb.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE budget.lineitem SET lin_description = ?, lin_category =?, lin_budgetedamount=?, lin_actualamount=?, WHERE lin_id=?; ");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE budget.lineitem SET lin_description = ?, lin_category =?, lin_budgetedamount=?, lin_actualamount=? WHERE lin_id=?; ");
             stmt.setString(1, aLineItem.getDescription());
             stmt.setString(2, aLineItem.getCategory());
             stmt.setDouble(3, aLineItem.getBudgetedAmount());
@@ -211,7 +211,7 @@ public class LineService
 
             try {
                 conn = myDB.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT FROM budget.lineitem WHERE lin_id =?");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM budget.lineitem WHERE lin_id =?");
                 stmt.setInt(1, idParse);
                 ResultSet rs = stmt.executeQuery();
 
@@ -220,7 +220,7 @@ public class LineService
                     foundId.setDescription(rs.getString("lin_description"));
                     foundId.setCategory(rs.getString("lin_category"));
                     foundId.setBudgetedAmount(rs.getDouble("lin_budgetedamount"));
-                    foundId.setTotalAmount(rs.getDouble("lin_acutalamount"));
+                    foundId.setTotalAmount(rs.getDouble("lin_actualamount"));
                     foundId.setId(rs.getInt("lin_id"));
                 }
             }
